@@ -3,11 +3,9 @@ const layout = "default"
 </script>
 
 <template>
-  <div class="">
-    <NuxtLayout :name="layout">
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+  <NuxtLayout :name="layout">
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 

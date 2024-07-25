@@ -7,7 +7,9 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
-    "@nuxt/content"
+    "@nuxt/content",
+    '@nuxt/image',
+    '@vueuse/nuxt',
   ],
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
@@ -19,7 +21,6 @@ export default defineNuxtConfig({
     icons: true,
   },
   content: {
-    documentDriven: true
   },
   css: [
     '~/assets/css/main.css',

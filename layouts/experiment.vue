@@ -1,6 +1,8 @@
 <template>
-  <div class=" min-h-screen  ">
-    <base-header></base-header>
+  <div>
+    <div class=" mb-6">
+      <NuxtLink to="/experiment">back</NuxtLink>
+    </div>
     <slot />
   </div>
 </template>

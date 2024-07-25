@@ -1,20 +1,19 @@
 <template>
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-6">Item List</h1>
-    <div class="flex flex-col gap-4">
-      <div v-for="item of list" :key="item.id"
-        class="rounded-xl border bg-gray-400 hover:bg-gray-600 cursor-pointer h-32 w-xl">
-        <div class="flex justify-between items-center p-4 shadow-coolGray">
-          <div class="font-bold">{{ item.title }}</div>
-          <div class="font-bold">{{ item.description }}</div>
-        </div>
+    <div v-for="(item, index) in list" :key="item.id"
+      class="slide-in-item rounded-xl border bg-gray-400 cursor-pointer h-32 w-xl mb-2" :style="{ '--index': index }">
+      <div class="flex justify-between items-center p-4 shadow-coolGray  ">
+        <div class="font-bold">{{ item.title }}</div>
+        <div class="font-bold">{{ item.description }}</div>
       </div>
     </div>
+
   </div>
 
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 const list = ref([
   { id: 1, title: 'Item 1', description: 'This is the full description for Item 1.' },
@@ -23,3 +22,19 @@ const list = ref([
 ])
 
 </script>
+
+<style scoped>
+.slide-in-item {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideIn 0.5s ease forwards;
+  animation-delay: calc(var(--index) * 0.2s);
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+</style>

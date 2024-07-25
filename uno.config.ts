@@ -1,5 +1,6 @@
 import { defineConfig } from 'unocss'
 import { presetUno, presetAttributify, presetIcons } from 'unocss'
+import { animatedUno } from 'animated-unocss'
 
 export default defineConfig({
   presets: [
@@ -10,10 +11,14 @@ export default defineConfig({
         'icon-park-solid': () => import('@iconify-json/icon-park-solid/icons.json').then(i => i.default),
       }
     }),
+    animatedUno(),
   ],
   // 自定义规则
   rules: [
-    ['custom-rule', { color: 'red' }]
+    ['custom-rule', { color: 'red' }],
+  ],
+  safelist: [
+    ...Array.from({ length: 20 }, (_, i) => `delay-${i}`)
   ],
   // 自定义快捷方式
   shortcuts: {
@@ -21,18 +26,9 @@ export default defineConfig({
     'btn-green': 'text-white bg-green-500 hover:bg-green-700',
     'standard-layout': 'max-w-4xl mx-a px-2',
     'blog-link': 'text-3xl font-bold opacity-60 hover:opacity-100 cursor-pointer mb-3',
-    'text-up': 'opacity-0 translate-y-full animate-[slide-up_2s_forwards]'
   },
+
   theme: {
-    keyframes: {
-      'slide-up': '{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}'
-    },
-    colors: {
-      primary: {
-        light: '',
-        dark: '',
-      }
-    },
     extend: {
       animation: {
         'circle-expand': 'circle-expand 0.5s ease-out forwards',
