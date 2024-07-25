@@ -1,8 +1,6 @@
 <template>
-  <div class=" min-h-screen  ">
-    <base-header></base-header>
-    <slot />
-  </div>
+  <base-header></base-header>
+  <slot />
 </template>
 
 <script lang="ts" setup>

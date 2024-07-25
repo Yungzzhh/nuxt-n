@@ -1,20 +1,21 @@
 <template>
-  <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-6">Item List</h1>
-    <div v-for="(item, index) in list" :key="item.id"
-      class="slide-in-item rounded-xl border bg-gray-400 cursor-pointer h-32 w-xl mb-2" :style="{ '--index': index }">
-      <div class="flex justify-between items-center p-4 shadow-coolGray  ">
-        <div class="font-bold">{{ item.title }}</div>
-        <div class="font-bold">{{ item.description }}</div>
+  <NuxtLayout name="experiment">
+    <div class="container mx-auto p-4">
+      <div v-for="(item, index) in list" :key="item.id"
+        class="slide-in-item rounded-xl border bg-gray-400 cursor-pointer h-32 w-xl mb-2" :style="{ '--index': index }">
+        <div class="flex justify-between items-center p-4 shadow-coolGray  ">
+          <div class="font-bold">{{ item.title }}</div>
+          <div class="font-bold">{{ item.description }}</div>
+        </div>
       </div>
     </div>
-
-  </div>
-
+  </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+const layout = 'experiment'
+
 const list = ref([
   { id: 1, title: 'Item 1', description: 'This is the full description for Item 1.' },
   { id: 2, title: 'Item 2', description: 'This is the full description for Item 2.' },
