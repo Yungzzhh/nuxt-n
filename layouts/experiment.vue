@@ -1,5 +1,5 @@
 <template>
-  <div class="container mb-6">
+  <div class="container mb-6 mx-auto text-center">
     <NuxtLink to="/experiment">back</NuxtLink>
   </div>
   <slot />

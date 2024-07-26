@@ -1,12 +1,14 @@
 <template>
-  <div class="container mx-auto ">
-    <ClientOnly>
-      <WaterfallLayout :items="images" />
-    </ClientOnly>
-    <div v-if="loading" class="loading">
-      加载中...
+  <NuxtLayout name="experiment">
+    <div class="container mx-auto ">
+      <ClientOnly>
+        <WaterfallLayout :items="images" />
+      </ClientOnly>
+      <div v-if="loading" class="loading">
+        加载中...
+      </div>
     </div>
-  </div>
+  </NuxtLayout>
 </template>
 
 <script setup>

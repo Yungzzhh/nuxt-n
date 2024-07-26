@@ -47,4 +47,12 @@ const layout = "default"
     transform: scale(1.1);
   }
 }
+
+.card {
+  view-transition-name: var(--view-transition-name, none);
+}
+
+.card-detail {
+  view-transition-name: var(--view-transition-name, none);
+}
 </style>

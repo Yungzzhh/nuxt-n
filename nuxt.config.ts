@@ -3,6 +3,9 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
+  experimental: {
+    viewTransition: true
+  },
   modules: [
     '@unocss/nuxt',
     '@pinia/nuxt',
@@ -24,5 +27,6 @@ export default defineNuxtConfig({
   },
   css: [
     '~/assets/css/main.css',
+    '~/assets/css/transition.css',
   ],
 })

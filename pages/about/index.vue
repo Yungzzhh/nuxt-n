@@ -16,6 +16,7 @@ const { data, error, refresh } = await useAsyncData(
     // pick: ['name', 'id'],
   },
 )
+console.log(data);
 
 // await refresh();
 const router = useRouter();
