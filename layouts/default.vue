@@ -1,10 +1,9 @@
 <template>
   <base-header></base-header>
-  <slot />
+  <NuxtPage />
 </template>
 
 <script lang="ts" setup>
-
 </script>
 
 <style></style>

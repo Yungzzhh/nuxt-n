@@ -2,8 +2,7 @@
   <NuxtLayout name="experiment">
     <div class="container mx-auto p-4">
       <div v-for="(item, index) in list" :key="item.id"
-        class="slide-in-item rounded-xl border bg-gray-400 cursor-pointer h-32 w-xl mb-2" :style="{ '--index': index }"
-        @click="startViewTransition(item.id)">
+        class="slide-in-item rounded-xl border bg-gray-400 cursor-pointer h-32 w-xl mb-2" :style="{ '--index': index }">
         <div class="flex justify-between items-center p-4 shadow-coolGray  ">
           <div class="font-bold">{{ item.title }}</div>
           <div class="font-bold">{{ item.description }}</div>
@@ -25,14 +24,6 @@ const list = ref([
   { id: 3, title: 'Item 3', description: 'This is the full description for Item 3.' },
 ])
 
-function startViewTransition(id: number) {
-  // if (!document.startViewTransition) return;
-
-  // document.documentElement.style.setProperty('--view-transition-name', `card-${id}`);
-  // document.startViewTransition(() => {
-  navigateTo(`/experiment/modal-transition/${id}`);
-  // });
-}
 
 </script>
 
@@ -65,13 +56,22 @@ function startViewTransition(id: number) {
 }
 
 @keyframes fade-in {
-  from { transform: translateY(-20px)}
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(-20px)
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
- 
 </style>

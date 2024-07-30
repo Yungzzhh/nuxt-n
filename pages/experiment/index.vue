@@ -3,6 +3,8 @@
     <NuxtLink to="/experiment/modal-transition">modal-transition</NuxtLink>
     <NuxtLink to="/experiment/waterfall">waterfall</NuxtLink>
     <NuxtLink to="/experiment/tabswitch">tabswitch</NuxtLink>
+    <NuxtLink to="/experiment/explore">router-intercept</NuxtLink>
+    <NuxtLink to="/experiment/radialBg">radial-background</NuxtLink>
   </div>
 </template>
 
