@@ -2,7 +2,7 @@
   <div class=" standard-layout pt-36 slide-enter-content">
     <div v-for="link of articles" class="mb-6 text-gray-500 hover:text-black cursor-pointer"
       @click="navigateTo(`${link._path}`)">
-      <div @click="navigateTo(`${link._path}`)">
+      <div @click="navigateTo(`${link._path}`)" class="dark:hover:!text-white">
         <span class="text-2xl font-bold  mr-2">
           {{ link.title || link._file }}
         </span>

@@ -1,5 +1,5 @@
 <template>
-  <base-header></base-header>
+  <base-nav></base-nav>
   <NuxtPage />
 </template>
 
