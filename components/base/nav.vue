@@ -15,17 +15,17 @@
               <div>{{ link.title }}</div>
             </div>
           </div>
-          <ClientOnly>
-            <div class="relative text-xl cursor-pointer" @click="handleToggleClick">
+          <div class="relative text-xl cursor-pointer" @click="handleToggleClick">
+            <ClientOnly>
               <div class="inset-0 transition-opacity duration-300" :class="[
                 isDark ?
                   'i-icon-park-solid:dark-mode' : 'i-icon-park-solid:sun'
               ]"></div>
-            </div>
-            <template #fallback>
-              <div class="inset-0 transition-opacity duration-300"></div>
-            </template>
-          </ClientOnly>
+              <template #fallback>
+                <div class=" w-20px h-20px "></div>
+              </template>
+            </ClientOnly>
+          </div>
         </div>
       </div>
     </div>
@@ -33,8 +33,22 @@
 </template>
 
 <script lang="ts" setup>
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
+
+const colorMode = useColorMode()
+const isDark = computed(() => colorMode.preference === 'dark')
+
+const toggleDark = () => {
+  colorMode.preference = isDark.value ? 'light' : 'dark'
+}
+
+const iconClass = computed(() => {
+  console.log(colorMode.value);
+
+  return colorMode.value === 'dark'
+    ? 'i-icon-park-solid:dark-mode'
+    : 'i-icon-park-solid:sun'
+})
+
 const isAnimating = ref(false)
 const linkList = [
   { title: 'Home', path: '/' },
@@ -117,4 +131,12 @@ const toggleTheme = (event: MouseEvent) => {
     stroke-dashoffset: 0;
   }
 }
+
+/* .dark .btns {
+  display: none;
+}
+
+.btns {
+  display: none;
+} */
 </style>

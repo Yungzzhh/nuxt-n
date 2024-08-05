@@ -16,6 +16,7 @@ export default defineConfig({
   // 自定义规则
   rules: [
     ['custom-rule', { color: 'red' }],
+    [/^view-transition-([\w-]+)$/, ([, name]) => ({ 'view-transition-name': name })],
   ],
   safelist: [
     ...Array.from({ length: 20 }, (_, i) => `delay-${i}`)
