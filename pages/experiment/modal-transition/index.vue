@@ -17,7 +17,6 @@
 import { ref } from 'vue'
 const layout = 'experiment'
 
-
 const list = ref([
   { id: 1, title: 'Item 1', description: 'This is the full description for Item 1.' },
   { id: 2, title: 'Item 2', description: 'This is the full description for Item 2.' },

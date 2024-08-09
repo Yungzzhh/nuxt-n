@@ -2,7 +2,7 @@
   <div :class="containerClass">
     <div v-for="(column, index) in columns" :key="index" class="column">
       <div v-for="item in column" :key="item.id" class="item">
-        <img :src="item.src" :alt="item.alt" :style="{ height: item.height + 'px' }" />
+        <NuxtImg :src="item.src" :alt="item.alt" :style="{ height: item.height + 'px' }" @click="handleClick" />
       </div>
     </div>
   </div>
@@ -55,6 +55,10 @@ onMounted(() => {
     window.addEventListener('resize', distributeItems);
   }
 });
+
+const handleClick = (e) => {
+  console.log(e);
+}
 </script>
 
 <style scoped>

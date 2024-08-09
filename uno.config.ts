@@ -31,21 +31,21 @@ export default defineConfig({
 
   theme: {
     extend: {
-      animation: {
-        'circle-expand': 'circle-expand 0.5s ease-out forwards',
-      },
-      keyframes: {
-        'circle-expand': {
-          '0%': {
-            transform: 'scale(0)',
-            opacity: '1',
-          },
-          '100%': {
-            transform: 'scale(200)',
-            opacity: '1',
-          },
-        },
-      },
+      // animation: {
+      //   'circle-expand': 'circle-expand 0.5s ease-out forwards',
+      // },
+      // keyframes: {
+      //   'circle-expand': {
+      //     '0%': {
+      //       transform: 'scale(0)',
+      //       opacity: '1',
+      //     },
+      //     '100%': {
+      //       transform: 'scale(200)',
+      //       opacity: '1',
+      //     },
+      //   },
+      // },
     },
   },
 })

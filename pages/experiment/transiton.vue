@@ -38,7 +38,6 @@ const navigateToLarge = (id: string) => {
         <NuxtImg width="600" height="400" transition duration-400 object-cover :src="`/temp/${i.total}`"
           :style="{ 'view-transition-name': `item-${i.id}` }" />
       </NuxtLink>
-
     </div>
 
   </div>

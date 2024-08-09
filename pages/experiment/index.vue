@@ -5,7 +5,6 @@
     <NuxtLink to="/experiment/tabswitch">tabswitch</NuxtLink>
     <NuxtLink to="/experiment/explore">router-intercept</NuxtLink>
     <NuxtLink to="/experiment/radialBg">radial-background</NuxtLink>
-    <NuxtLink to="/experiment/scroll">scroll</NuxtLink>
     <NuxtLink to="/experiment/transiton">transiton</NuxtLink>
   </div>
 </template>

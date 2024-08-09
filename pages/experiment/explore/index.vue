@@ -1,18 +1,22 @@
 <template>
   <div class="flex gap-8 flex-col items-center my-10">
     <div v-for="item in items" :key="item.id" @click="handleItemClick(item)"
-      class="w-400px h-200px flex justify-center items-center bg-gray-4 rounded-2xl shadow-2xl">
+      :style="{ viewTransitionName: `card-title-${item.id}` }"
+      class=" cursor-zoom-in transition-all duration-300 ease-in-out w-400px h-200px flex justify-center items-center bg-gray-4 rounded-2xl shadow-2xl">
       {{ item.name }}
     </div>
 
-    <Modal :isOpen="showModal" @close="handleCloseModal">
-      <div class=" bg-white w-1/2 h-1/4 rounded-2xl p-4">
+    <div v-if="showModal"
+      class=" w-screen h-screen bg-blueGray absolute top-0 bg-op-40 flex justify-center items-center"
+      @click.self="handleCloseModal">
+      <div class=" bg-white w-1/2 h-1/4 rounded-2xl p-4"
+        :style="{ viewTransitionName: `card-image-${selectedItem.id}` }">
         <div class="flex flex-col items-center gap-4 ">
           <div>title</div>
           <div>content</div>
         </div>
       </div>
-    </Modal>
+    </div>
   </div>
 </template>
 
@@ -21,7 +25,7 @@ const route = useRoute()
 
 const items = ref([])
 const selectedItem = ref(null)
-const showModal = computed(() => !!selectedItem.value)
+const showModal = ref(false)
 
 // 模拟获取items的函数
 const fetchItems = async () => {
@@ -53,12 +57,14 @@ onMounted(async () => {
 // 处理item点击事件
 const handleItemClick = (item) => {
   selectedItem.value = item
+  showModal.value = true
   updateUrl(`/experiment/explore/${item.id}`)
 }
 
 // 处理modal关闭事件
 const handleCloseModal = () => {
   selectedItem.value = null
+  showModal.value = false
   updateUrl('/experiment/explore')
 }
 
@@ -83,3 +89,22 @@ const handlePopState = () => {
   }
 } 
 </script>
+
+<style scoped>
+.zoom-fade-enter-active,
+.zoom-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.zoom-fade-enter-from,
+.zoom-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.zoom-fade-enter-to,
+.zoom-fade-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+</style>
