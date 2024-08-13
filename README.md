@@ -90,3 +90,13 @@ vue-query
 ## stores
 
 pinia
+
+## docker
+
+```bash
+docker build -t nuxt-n .     
+```
+
+```bash
+docker run -p 3000:3000 nuxt-n
+```
