@@ -3,9 +3,12 @@ const layout = "default"
 </script>
 
 <template>
-  <NuxtLayout :name="layout">
-    <NuxtPage />
-  </NuxtLayout>
+  <UContainer>
+    <NuxtLayout :name="layout">
+      <NuxtPage />
+    </NuxtLayout>
+  </UContainer>
+
 </template>
 
 

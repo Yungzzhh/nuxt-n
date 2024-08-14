@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     '@nuxt/image',
     '@vueuse/nuxt',
+    "@nuxt/ui"
   ],
   colorMode: {
     // preference: 'system', // default value of $colorMode.preference
@@ -41,5 +42,7 @@ export default defineNuxtConfig({
   ],
   build: {
     transpile: ['medium-zoom']
+  },
+  ui: {
   }
 })
