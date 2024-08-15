@@ -1,0 +1,1 @@
+export const DEFAULT_IMAGE_URL = 'https://pdmmdeucmfnmsalljpjb.supabase.co/storage/v1/object/public/dishes/dishes/2024-08-12T18:31:19.913496_image_cropper_323336AF-362A-44A0-84C3-484DE904FD7F-29370-00000BC01E38251F.jpg'

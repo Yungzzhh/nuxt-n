@@ -1,60 +1,70 @@
 <template>
-  <div class="container mx-auto  flex">
-    <!-- cardList -->
-    <div class="w-2/3 mr-20">
-      <div class=" bg-bluegray h-[calc(100vh-10rem)]
-     overflow-y-auto rounded-2xl  p-4 ">
-        <template v-if="cards.length">
-          <div class="flex flex-wrap gap-4">
-            <div v-for="card in cards" :key="card.name"
-              class="w-280px h-max p-4 border border-coolGray rounded-lg bg-white shadow-2xl ">
-              <UForm :validate="validateCard" :state="card" class="space-y-4" ref="formRef">
-                <UFormGroup label="名称" name="name">
-                  <UInput v-model="card.name" />
-                </UFormGroup>
-
-                <UFormGroup label="描述" name="description">
-                  <UTextarea v-model="card.description" resize type="description" />
-                </UFormGroup>
-
-                <UFormGroup label="方式" name="cookingMethod">
-                  <USelectMenu v-model="card.cookingMethod" :options="cookingMethods" clearable multiple
-                    value-attribute="value" option-attribute="label" />
-                </UFormGroup>
-
-                <UFormGroup label="肉类" name="meatType">
-                  <USelectMenu v-model="card.meatType" :options="meatTypes" multiple value-attribute="value"
-                    option-attribute="label" />
-                </UFormGroup>
-              </UForm>
-            </div>
-          </div>
-        </template>
-        <!-- add -->
-        <div
-          class="w-200px h-32 border border-dashed border-gray-300 rounded-lg flex justify-center items-center  hover:cursor-pointer"
-          :class="{ 'mt-8': cards.length }" @click="add">
-          <div class="i-icon-park-solid:add-one text-white w-36px h-36px"></div>
-        </div>
+  <div class=" mx-auto">
+    <div class="w-full flex flex mb-4">
+      <!-- input -->
+      <div class="flex-1">
+        <div class="mb-2">输入你的想法</div>
+        <UTextarea v-model="userInput" color="primary" variant="outline" placeholder="Search..." />
       </div>
-      <div v-if="cards.length" class="w-full flex flex-justify-end mt-4">
-        <UButton type="submit" @click="triggerValidation">
-          Submit
-        </UButton>
+      <!-- buttons -->
+      <div class="flex flex-1 gap-4 h-max pl-4">
+        <UButton label="生成" @click="genDishes" :disabled="isLoading" />
+        <UButton label="清空" @click="() => {
+          userInput = ''
+          response = ''
+        }" />
+        <UButton label="提交" @click="submit" :disabled="isLoading" />
       </div>
     </div>
-    <!-- codeInput -->
-    <div class="w-1/3">
-      <JsonEditor v-model="jsonInput" />
-      <UButton label="Show toast" @click="parseJson" />
+    <!-- cardList -->
+    <div class="bg-bluegray h-auto
+     overflow-y-auto rounded-2xl  p-2 ">
+      <template v-if="cards.length">
+        <div class="flex flex-wrap gap-2">
+          <div v-for="card in cards" :key="card.name"
+            class="w-[calc((100%-24px)/4)] h-max p-4 border border-coolGray rounded-lg bg-white shadow-2xl ">
+            <UForm :validate="validateCard" :state="card" class="space-y-4" ref="formRef">
+              <UFormGroup label="名称" name="name">
+                <UInput v-model="card.name" />
+              </UFormGroup>
+
+              <UFormGroup label="描述" name="description">
+                <UTextarea v-model="card.description" resize type="description" />
+              </UFormGroup>
+
+              <UFormGroup label="方式" name="cookingMethod">
+                <USelectMenu v-model="card.cookingMethod" :options="cookingMethods" clearable multiple
+                  value-attribute="value" option-attribute="label" />
+              </UFormGroup>
+
+              <UFormGroup label="肉类" name="meatType">
+                <USelectMenu v-model="card.meatType" :options="meatTypes" multiple value-attribute="value"
+                  option-attribute="label" />
+              </UFormGroup>
+            </UForm>
+          </div>
+        </div>
+      </template>
+      <template v-if="isLoading">
+        <div>generating...</div>
+      </template>
+      <!-- add -->
+      <div
+        class="w-200px h-32 border border-dashed border-gray-300 rounded-lg flex justify-center items-center  hover:cursor-pointer"
+        :class="{ 'mt-8': cards.length }" @click="add">
+        <div class="i-icon-park-solid:add-one text-white w-36px h-36px"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import JsonEditor from '~/components/JsonEditor.vue'
-import type { FormError, } from '#ui/types'
+const userInput = ref('')
+const response = ref('')
+const isLoading = ref(false)
+const submitLoading = ref(false)
+
 type CookingMethod = "STIR_FRY" | "STEAM" | "BRAISE" | "FRY" | "SALAD" | "ROAST";
 type MeatType = "BEEF" | "PORK" | "LAMB" | "CHICKEN" | "SEAFOOD";
 
@@ -63,6 +73,74 @@ interface Card {
   description: string;
   cookingMethod?: CookingMethod[];
   meatType?: MeatType[];
+}
+
+async function genDishes() {
+  isLoading.value = true
+
+  try {
+    const { data } = await useFetch('/api/chat', {
+      method: 'POST',
+      body: {
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system", content: `
+            生成菜谱,
+            {
+              "name": "string",
+              "description": "string",
+              "cookingMethod": [],
+              "meatType": []
+            }
+              
+            description为菜品的原材料和调料即可
+            cookingMethod as Array, 请从"STIR_FRY" | "STEAM" | "BRAISE" | "FRY" | "SALAD" | "ROAST"中分类, 
+            meatType  as Array, 请从"BEEF" | "PORK" | "LAMB" | "CHICKEN" | "SEAFOOD"中自动分类, 
+            需要生成多个, 然后组合成一个json数组
+            肉类和方式可以是多选
+            以上所有参数为必填
+            保证响应内容只显示数组，不需要显示其他内容
+          ` },
+          { role: "user", content: userInput.value }
+        ]
+      }
+    })
+
+    response.value = data.value.choices[0].message.content
+    cards.value = JSON.parse(response.value)
+    userInput.value = '' // Clear input after sending
+  } catch (error) {
+    console.error('Error:', error)
+    response.value = 'An error occurred while fetching the response.'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+async function addDishes() {
+  submitLoading.value = true
+  const dishes = cards.value.map(card => {
+    return {
+      name: card.name,
+      description: card.description,
+      cookingMethod: card.cookingMethod,
+      meatType: card.meatType,
+      imageUrl: DEFAULT_IMAGE_URL
+    }
+  })
+
+  const { data, error }: any = await useFetch('/api/add-dishes-batch', {
+    method: 'POST',
+    body: dishes
+  })
+  console.log(data);
+  if (data.value?.success) {
+    console.log('Dishes added successfully:', data.value.results)
+  } else {
+    console.error('Failed to add dishes:', error.value || data.value?.error)
+  }
+  submitLoading.value = false
 }
 
 const cookingMethods = [
@@ -81,6 +159,7 @@ const meatTypes = [
   { "value": "CHICKEN", "label": "鸡肉" },
   { "value": "SEAFOOD", "label": "海鲜" }
 ]
+
 const cards = ref<Card[]>([]);
 const add = () => {
   cards.value.push({
@@ -90,40 +169,40 @@ const add = () => {
     meatType: []
   })
 }
-
-const formRef = ref(null)
-const triggerValidation = () => {
-  console.log(formRef.value);
-
-  if (formRef.value) {
-    (formRef.value as any).map((form: any) => {
-      form.validate()
-    })
+const submit = async () => {
+  const isValid = await triggerValidationAwait()
+  if (isValid) {
+    addDishes()
   }
 }
 
-const validateCard = (state: Card): FormError[] => {
+const formRef = ref(null)
+const triggerValidationAwait = async () => {
+  const form: any = formRef.value
+  if (form) {
+    const res = await Promise.all(
+      form.map((form: any) => form.validate())
+    );
+    if (res && res.length) return true
+    return false
+  }
+  return false
+};
+
+const validateCard = (state: Card) => {
   const errors = []
   if (!state.name) errors.push({ path: 'name', message: 'Required' })
   if (!state.description) errors.push({ path: 'description', message: 'Required' })
   if (!state.cookingMethod?.length) errors.push({ path: 'cookingMethod', message: 'Required' })
   if (!state.meatType?.length) errors.push({ path: 'meatType', message: 'Required' })
   return errors
-}
-
-const jsonInput = ref('')
-const toast = useToast()
-const parseJson = () => {
-  toast.add({ title: ' error.message ' })
-  try {
-    const parsedData = JSON.parse(jsonInput.value)
-    if (Array.isArray(parsedData)) {
-      cards.value = parsedData
-    } else {
-      cards.value = [parsedData]
-    }
-  } catch (error: any) {
-    console.log(error.message);
-  }
-}
+} 
 </script>
+
+<style scoped>
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+</style>

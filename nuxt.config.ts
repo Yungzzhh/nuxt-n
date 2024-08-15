@@ -2,19 +2,37 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   experimental: {
     viewTransition: true
   },
   modules: [
+    "@nuxtjs/supabase",
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     "@nuxt/content",
     '@nuxt/image',
     '@vueuse/nuxt',
-    "@nuxt/ui"
+    "@nuxt/ui",
+    "nuxt-monaco-editor",
   ],
+  monacoEditor: {
+    // These are default values:
+    locale: 'en',
+    componentName: {
+      codeEditor: 'MonacoEditor',
+      diffEditor: 'MonacoDiffEditor'
+    }
+  },
+  nitro: {
+    preset: 'node-server'
+  },
+  supabase: {
+    url: process.env.SUPABASE_URL,
+    key: process.env.SUPABASE_KEY,
+    redirect: false
+  },
   colorMode: {
     // preference: 'system', // default value of $colorMode.preference
     // fallback: 'light', // fallback value if not system preference found
@@ -44,5 +62,5 @@ export default defineNuxtConfig({
     transpile: ['medium-zoom']
   },
   ui: {
-  }
+  },
 })
