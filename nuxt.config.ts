@@ -7,7 +7,6 @@ export default defineNuxtConfig({
     viewTransition: true
   },
   modules: [
-    "@nuxtjs/supabase",
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
@@ -27,11 +26,6 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'node-server'
-  },
-  supabase: {
-    url: process.env.SUPABASE_URL,
-    key: process.env.SUPABASE_KEY,
-    redirect: false
   },
   colorMode: {
     preference: 'light', // default value of $colorMode.preference

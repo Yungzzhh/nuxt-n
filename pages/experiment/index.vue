@@ -17,7 +17,6 @@ const routes = [
   { path: "/experiment/explore", name: "router-intercept" },
   { path: "/experiment/radialBg", name: "radial-background" },
   { path: "/experiment/transiton", name: "transiton" },
-  { path: "/experiment/menu", name: "menu" },
 ];
 </script>
 <style scoped></style>
