@@ -8,11 +8,13 @@ html {
   --white: #fff;
   --background: var(--white);
   --foreground: var(--black);
+  --text-color: var(--foreground);
 }
 
 :root.dark {
   --background: var(--black);
   --foreground: var(--white);
+  --text-color: var(--foreground);
 }
 
 html {
@@ -157,11 +159,17 @@ body {
   }
 }
 
-a {
+/* a {
   color: #3490dc;
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+} */
+
+a.nuxt-link {
+  /* 你的样式 */
+  --text-color: var(--foreground);
+  text-decoration: none;
 }

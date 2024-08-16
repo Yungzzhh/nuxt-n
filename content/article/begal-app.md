@@ -259,6 +259,7 @@ async function genDishes() {
 在 **nuxt.config.ts** 中配置好
 
 ```ts
+// 如果不设置好 内置的中间件会重定向到loginpage 相关issue: https://github.com/supabase/supabase/issues/16551
 export default defineNuxtConfig({
     modules: [
         '@nuxtjs/supabase'

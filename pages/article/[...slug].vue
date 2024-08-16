@@ -1,28 +1,34 @@
 <template>
-  <main class="prose standard-layout slide-enter-content">
-    <ContentDoc v-slot="{ doc }">
-      <article class="blog-post">
-        <header class="post-header">
-          <h1 class="post-title">{{ doc?.title }}</h1>
-          <div class="post-meta">
-            <time class="post-time">{{ doc.time }}</time>
+  <div class="w-full relative">
+    <main class="prose mt-10 slide-enter-content">
+      <ContentDoc v-slot="{ doc }">
+        <article class="blog-post">
+          <header class="post-header">
+            <h1 class="post-title">{{ doc?.title }}</h1>
+            <div class="post-meta">
+              <time class="post-time">{{ doc.time }}</time>
+            </div>
+          </header>
+          <div class="post-description">
+            <p>{{ doc.description }}</p>
           </div>
-        </header>
-        <div class="post-description">
-          <p>{{ doc.description }}</p>
-        </div>
-      </article>
+        </article>
 
-      <ContentRenderer :value="doc" />
-    </ContentDoc>
-  </main>
+        <ContentRenderer :value="doc" />
+      </ContentDoc>
+    </main>
+  </div>
 </template>
 
 <script setup>
 const route = useRoute()
 const res = await useAsyncData(`content-${route.path}`, () =>
   queryContent(route.path).findOne()
-) 
+)
+// const catalogList = res.data.value.body.children.filter((item) => item.tag === 'h2');
+
+// console.log(catalogList);
+
 </script>
 
 <style scoped>

@@ -33,12 +33,12 @@
               </UFormGroup>
 
               <UFormGroup label="方式" name="cookingMethod">
-                <USelectMenu v-model="card.cookingMethod" :options="cookingMethods" clearable multiple
+                <USelectMenu v-model="card.cookingMethod" :options="COOKING_METHODS" clearable multiple
                   value-attribute="value" option-attribute="label" />
               </UFormGroup>
 
               <UFormGroup label="肉类" name="meatType">
-                <USelectMenu v-model="card.meatType" :options="meatTypes" multiple value-attribute="value"
+                <USelectMenu v-model="card.meatType" :options="MEAT_TYPES" multiple value-attribute="value"
                   option-attribute="label" />
               </UFormGroup>
             </UForm>
@@ -64,6 +64,23 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+const COOKING_METHODS = [
+  { "value": "STIR_FRY", "label": "炒" },
+  { "value": "STEAM", "label": "蒸" },
+  { "value": "BRAISE", "label": "焖" },
+  { "value": "FRY", "label": "炸" },
+  { "value": "SALAD", "label": "凉拌" },
+  { "value": "ROAST", "label": "烤" }
+]
+
+const MEAT_TYPES = [
+  { "value": "BEEF", "label": "牛肉" },
+  { "value": "PORK", "label": "猪肉" },
+  { "value": "LAMB", "label": "羊肉" },
+  { "value": "CHICKEN", "label": "鸡肉" },
+  { "value": "SEAFOOD", "label": "海鲜" }
+]
+
 const userInput = ref('')
 const response = ref('')
 const isLoading = ref(false)
@@ -146,23 +163,6 @@ async function addDishes() {
   }
   submitLoading.value = false
 }
-
-const cookingMethods = [
-  { "value": "STIR_FRY", "label": "炒" },
-  { "value": "STEAM", "label": "蒸" },
-  { "value": "BRAISE", "label": "焖" },
-  { "value": "FRY", "label": "炸" },
-  { "value": "SALAD", "label": "凉拌" },
-  { "value": "ROAST", "label": "烤" }
-]
-
-const meatTypes = [
-  { "value": "BEEF", "label": "牛肉" },
-  { "value": "PORK", "label": "猪肉" },
-  { "value": "LAMB", "label": "羊肉" },
-  { "value": "CHICKEN", "label": "鸡肉" },
-  { "value": "SEAFOOD", "label": "海鲜" }
-]
 
 const cards = ref<Card[]>([]);
 const add = () => {

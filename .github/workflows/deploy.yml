@@ -1,0 +1,67 @@
+name: Deploy Nuxt 3 Application
+
+on:
+  push:
+    branches:
+      - main # 或你希望触发部署的分支
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20" # 根据你的项目需要选择 Node.js 版本
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9 # 使用最新的稳定版本，你也可以指定具体版本
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libvips-dev
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build Nuxt application
+        run: pnpm run build --verbose
+
+      - name: Prepare deployment package
+        run: |
+          tar -czf deployment.tar.gz -C .output .
+
+      - name: Copy file to server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          source: "deployment.tar.gz"
+          target: "/home/michael/blog"
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /home/michael/blog
+            rm -rf .output
+            tar -xzf deployment.tar.gz
+            rm deployment.tar.gz
+            pm2 restart rzh-blog
+            if ! dpkg -s fontconfig >/dev/null 2>&1; then
+              sudo apt-get update
+              sudo apt-get install -y fontconfig
+            fi
