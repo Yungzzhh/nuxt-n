@@ -7,7 +7,7 @@
         <UTextarea v-model="userInput" color="primary" variant="outline" placeholder="Search..." />
       </div>
       <!-- buttons -->
-      <div class="flex flex-1 gap-4 h-max pl-4">
+      <div class="flex flex-1 justify-center gap-4 h-max pl-4">
         <UButton label="生成" @click="genDishes" :disabled="isLoading" />
         <UButton label="清空" @click="() => {
           userInput = ''
@@ -21,8 +21,8 @@
      overflow-y-auto rounded-2xl  p-2 ">
       <template v-if="cards.length">
         <div class="flex flex-wrap gap-2">
-          <div v-for="card in cards" :key="card.name"
-            class="w-[calc((100%-24px)/4)] h-max p-4 border border-coolGray rounded-lg bg-white shadow-2xl ">
+          <div v-for="(card, index) in cards" :key="card.name"
+            class="w-[calc((100%-24px)/4)] h-max p-4 relative border border-coolGray rounded-lg bg-white dark:bg-dark shadow-2xl ">
             <UForm :validate="validateCard" :state="card" class="space-y-4" ref="formRef">
               <UFormGroup label="名称" name="name">
                 <UInput v-model="card.name" />
@@ -42,6 +42,10 @@
                   option-attribute="label" />
               </UFormGroup>
             </UForm>
+            <div
+              class="w-32px h-32px bg-bluegray absolute -right-8px -top-8px rounded-xl flex justify-center items-center">
+              <div class="i-icon-park-solid:delete text-color-red hover:cursor-pointer" @click="remove(index)"></div>
+            </div>
           </div>
         </div>
       </template>
@@ -174,6 +178,9 @@ const submit = async () => {
   if (isValid) {
     addDishes()
   }
+}
+const remove = async (index: number) => {
+  cards.value.splice(index, 1)
 }
 
 const formRef = ref(null)

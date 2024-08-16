@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     redirect: false
   },
   colorMode: {
-    // preference: 'system', // default value of $colorMode.preference
+    preference: 'light', // default value of $colorMode.preference
     // fallback: 'light', // fallback value if not system preference found
     // hid: 'nuxt-color-mode-script',
     // globalName: '__NUXT_COLOR_MODE__',
@@ -57,6 +57,7 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.css',
     '~/assets/css/transition.css',
+    '~/assets/css/prose.css',
   ],
   build: {
     transpile: ['medium-zoom']

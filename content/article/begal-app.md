@@ -188,3 +188,92 @@ ON storage.objects FOR DELETE
 USING (bucket_id = 'dishes');
 
 ```
+
+## 批量导入面板
+
+### 交互设计
+
+- 输入框 - 生成菜品 - 菜品CRUD
+- AI模型选择 - AI prompt
+- 一键上传数据
+- 生成loading 生成成功、生成失败提示
+- 上传loading 上传成功、上传失败提示
+-
+
+### 接入AI
+
+- 配置环境
+**.env** 中配置好**OPENAI_API_KEY**
+
+```ts
+async function genDishes() {
+  isLoading.value = true
+
+  try {
+    const { data } = await useFetch('/api/chat', {
+      method: 'POST',
+      body: {
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system", content: `
+            生成菜谱,
+            {
+              "name": "string",
+              "description": "string",
+              "cookingMethod": [],
+              "meatType": []
+            }
+              
+            description为菜品的原材料和调料即可
+            cookingMethod as Array, 请从"STIR_FRY" | "STEAM" | "BRAISE" | "FRY" | "SALAD" | "ROAST"中分类, 
+            meatType  as Array, 请从"BEEF" | "PORK" | "LAMB" | "CHICKEN" | "SEAFOOD"中自动分类, 
+            需要生成多个, 然后组合成一个json数组
+            肉类和方式可以是多选
+            以上所有参数为必填
+            保证响应内容只显示数组，不需要显示其他内容
+          ` },
+          { role: "user", content: userInput.value }
+        ]
+      }
+    })
+
+    response.value = data.value.choices[0].message.content
+    cards.value = JSON.parse(response.value) 
+  } catch (error) {
+    console.error('Error:', error)
+    response.value = `
+        An error occurred while fetching the response.
+        Try to switch different model
+    `
+  } finally {
+    isLoading.value = false
+  }
+}
+```
+
+### web接入supabase
+
+- 配置环境
+**.env** 中配置好**SUPABASE_URL** 和 **SUPABASE_KEY**
+在 **nuxt.config.ts** 中配置好
+
+```ts
+export default defineNuxtConfig({
+    modules: [
+        '@nuxtjs/supabase'
+    ]
+    supabase: {
+        url: process.env.SUPABASE_URL,
+        key: process.env.SUPABASE_KEY,
+        redirect: false
+    },
+})
+```
+
+```ts
+// server/api/**.ts
+export default defineEventHandler(async (event: H3Event) => {
+  const client: any = await serverSupabaseClient(event)
+})
+```

@@ -1,5 +1,5 @@
 <template>
-  <main class=" standard-layout slide-enter-content">
+  <main class="prose standard-layout slide-enter-content">
     <ContentDoc v-slot="{ doc }">
       <article class="blog-post">
         <header class="post-header">
