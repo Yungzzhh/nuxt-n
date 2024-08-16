@@ -60,3 +60,4 @@ jobs:
             rm -rf .output
             tar -xzf deployment.tar.gz
             rm deployment.tar.gz
+            pm2 restart blog
