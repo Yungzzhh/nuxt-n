@@ -16,6 +16,11 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "nuxt-monaco-editor",
   ],
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+    }
+  },
   monacoEditor: {
     // These are default values:
     locale: 'en',
@@ -25,7 +30,10 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    preset: 'node-server'
+    preset: 'node-server',
+    prerender: {
+      routes: ['/feed.xml']
+    }
   },
   colorMode: {
     preference: 'light', // default value of $colorMode.preference

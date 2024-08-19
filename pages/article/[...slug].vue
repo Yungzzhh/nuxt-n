@@ -1,6 +1,6 @@
 <template>
   <div class="w-full relative">
-    <main class="prose mt-10 slide-enter-content">
+    <main class=" mt-10 slide-enter-content">
       <ContentDoc v-slot="{ doc }">
         <article class="blog-post">
           <header class="post-header">
@@ -14,13 +14,27 @@
           </div>
         </article>
 
-        <ContentRenderer :value="doc" />
+        <div class="prose">
+          <ContentRenderer :value="doc" :components="components">
+
+            <template #empty>
+              <p>No content found.</p>
+            </template>
+          </ContentRenderer>
+        </div>
+
       </ContentDoc>
     </main>
   </div>
 </template>
 
 <script setup>
+import FancyHeader from '~/components/content/FancyHeader.vue';
+
+
+const components = {
+  'fancy-header': FancyHeader
+}
 const route = useRoute()
 const res = await useAsyncData(`content-${route.path}`, () =>
   queryContent(route.path).findOne()
@@ -33,7 +47,7 @@ const res = await useAsyncData(`content-${route.path}`, () =>
 
 <style scoped>
 .blog-post {
-  max-width: 800px;
+  /* max-width: 800px; */
   font-family: Arial, sans-serif;
 }
 

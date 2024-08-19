@@ -23,6 +23,7 @@
     "nuxt-monaco-editor": "^1.2.9",
     "pinia": "^2.1.7",
     "prismjs": "^1.29.0",
+    "rss": "^1.2.2",
     "unocss": "^0.61.5",
     "vue": "latest",
     "vue-i18n": "^9.13.1"
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@nuxtjs/color-mode": "^3.4.2",
+    "@types/rss": "^0.0.32",
     "@unocss/nuxt": "^0.61.5",
     "@unocss/preset-attributify": "^0.61.5",
     "@unocss/preset-icons": "^0.61.5",

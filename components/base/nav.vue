@@ -10,25 +10,15 @@
         </svg>
         <div class="flex flex-row items-center gap-2xl">
           <div v-for="link of linkList" :key="link.title">
-            <div class="flex items-end font-bold opacity-60  hover:opacity-100 cursor-pointer"
-              @click="navigateTo(link.path)">
+            <NuxtLink
+              class="flex items-end font-bold opacity-60  hover:opacity-100 cursor-pointer hover:translate-y-[-2px]"
+              :to="link.path" :target="link.target ?? '_self'">
               <div>{{ link.title }}</div>
-            </div>
+            </NuxtLink>
           </div>
           <div class="relative text-xl cursor-pointer" @click="toggleTheme">
-            <ClientOnly>
-              <div class="inset-0 transition-opacity duration-500" :class="[
-                isDark ?
-                  'i-icon-park-solid:dark-mode' : 'i-icon-park-solid:sun'
-              ]"></div>
-              <template #fallback>
-                <div class=" w-20px h-20px "></div>
-              </template>
-            </ClientOnly>
-            <!-- <div class="inset-0 transition-opacity duration-300" :class="[
-              isDark ?
-                'i-icon-park-solid:dark-mode' : 'i-icon-park-solid:sun'
-            ]"></div> -->
+            <div class=" light:hidden inset-0 transition-opacity duration-500 i-icon-park-solid:dark-mode"></div>
+            <div class=" dark:hidden inset-0 transition-opacity duration-500 i-icon-park-solid:sun"></div>
           </div>
         </div>
       </div>
@@ -44,6 +34,7 @@ const { toggleTheme, isDark } = useToggleTheme();
 const linkList = [
   { title: 'Home', path: '/' },
   { title: 'Experiment', path: '/experiment' },
+  { title: 'RSS', path: '/feed.xml', target: '_blank' },
 ]
 
 </script>
