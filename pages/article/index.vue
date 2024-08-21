@@ -60,6 +60,8 @@ const groupedArticles: any = ref([])
 if (Array.isArray(articles.value) && articles.value.length > 0) {
   groupedArticles.value = articles.value.reduce((acc: any, article: any) => {
     const year = new Date(article.time).getFullYear()
+    console.log(year, 'year');
+
     let yearGroup = acc.find((group: any) => group.year === year);
     if (!yearGroup) {
       yearGroup = { year, article: [] };
@@ -69,6 +71,7 @@ if (Array.isArray(articles.value) && articles.value.length > 0) {
     return acc;
   }, []);
 }
+console.log(groupedArticles.value);
 
 </script>
 

@@ -1,7 +1,7 @@
 --- 
 title: Flutter Easy Transition
 description: '--' 
-time: '2024-8-13 4:00 PM'
+time: '2024-8-13'
 ---
 
 ```dart

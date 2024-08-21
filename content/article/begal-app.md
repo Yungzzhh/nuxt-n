@@ -1,7 +1,7 @@
 ---
 title: 'Begal App'
 description: 'meta desc if about page' 
-time: '2023-10-01 10:00 AM'
+time: '2023-10-01'
 --- 
 ## 前端
 

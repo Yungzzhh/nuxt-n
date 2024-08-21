@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     .sort({ date: -1 })
     .where({ _partial: false })
     .find();
-  console.log('docs', docs);
+  // console.log('docs', docs);
 
   // 过滤博客文章
   const blogPosts = docs.filter((doc) => doc?._path?.includes("/article"));
