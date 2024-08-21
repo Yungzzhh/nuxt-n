@@ -35,6 +35,16 @@ import flutter_local_notifications
         GeneratedPluginRegistrant.register(with: registry)
     }
 
+    // 请求通知权限
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+      if granted {
+        print("Notification permission granted")
+      } else {
+        print("Notification permission denied")
+      }
+    }    
+
+    // 兼容
     if #available(iOS 10.0, *) {
       UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
     }
@@ -43,6 +53,23 @@ import flutter_local_notifications
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
+```
+
+```plist
+// ios/Runner/Info.plist
+<key>UIBackgroundModes</key>
+ <array>
+   <string>fetch</string>
+   <string>remote-notification</string>
+ </array>
+ <key>UIUserNotificationSettings</key>
+ <array>
+   <string>alert</string>
+   <string>badge</string>
+   <string>sound</string>
+ </array>
+ <key>NSUserNotificationUsageDescription</key>
+ <string>We need to send you notifications about your meal plans.</string>
 ```
 
 ## 构造基本的本地通知类并初始化
@@ -70,9 +97,9 @@ class NotificationService {
 
     const DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false,
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
     );
 
     const InitializationSettings initializationSettings =
