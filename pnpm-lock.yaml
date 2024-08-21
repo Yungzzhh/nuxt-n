@@ -60,6 +60,9 @@ importers:
         specifier: ^9.13.1
         version: 9.13.1(vue@3.4.31(typescript@5.5.3))
     devDependencies:
+      '@iconify-json/uil':
+        specifier: ^1.1.9
+        version: 1.1.9
       '@intlify/unplugin-vue-i18n':
         specifier: ^4.0.0
         version: 4.0.0(rollup@4.18.1)(vue-i18n@9.13.1(vue@3.4.31(typescript@5.5.3)))
@@ -755,6 +758,9 @@ packages:
 
   '@iconify-json/icon-park-solid@1.1.14':
     resolution: {integrity: sha512-oXV3KoGjd6vyOArhhumrCAuvG9+1G4+FHQEy76WbnU6lDoir8jnkGyDxmMTfmz831eHCUXC/pqnS1Gr0TfEPUg==}
+
+  '@iconify-json/uil@1.1.9':
+    resolution: {integrity: sha512-NZkqwKfG2TsJClxzVjYi2a3Mam/3ZrNjzxHNniqqwrSiAQ6QYx9VlFmazQUXQF5xu9v1z1wIeQo3vYClvanrnw==}
 
   '@iconify/collections@1.0.449':
     resolution: {integrity: sha512-qkAj2Qcsjqwh4H3vdgTQ+SGbbfvAxZXPDM8KG0gUtGFORAKuSES6UVoEuIPdT5rxtJaJw+Km/ucdJ+eCSmO8Xw==}
@@ -5497,6 +5503,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/icon-park-solid@1.1.14':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/uil@1.1.9':
     dependencies:
       '@iconify/types': 2.0.0
 

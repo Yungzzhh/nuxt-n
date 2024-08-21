@@ -9,6 +9,7 @@ export default defineConfig({
     presetIcons({
       collections: {
         'icon-park-solid': () => import('@iconify-json/icon-park-solid/icons.json').then(i => i.default),
+        'uil': () => import('@iconify-json/uil/icons.json').then(i => i.default),
       }
     }),
     animatedUno(),
@@ -23,6 +24,7 @@ export default defineConfig({
   ],
   // 自定义快捷方式
   shortcuts: {
+    'link': 'text-[#050505] dark:text-[#ffffff] border-b border-solid border-[rgba(125,125,125,0.3)] pb-1 hover:cursor-pointer hover:border-[rgba(125,125,125,1)]',
     'btn': 'py-2 px-4 font-semibold rounded-lg shadow-md',
     'btn-green': 'text-white bg-green-500 hover:bg-green-700',
     'standard-layout': 'max-w-4xl mx-a px-2',
