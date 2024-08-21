@@ -1,5 +1,5 @@
 --- 
-title: Flutter Easy Transition
+title: 'Flutter Easy Transition'
 description: '--' 
 time: '2024-8-13'
 ---
