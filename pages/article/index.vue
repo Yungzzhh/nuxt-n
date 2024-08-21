@@ -1,7 +1,7 @@
 <template>
   <div class="pt-24 slide-enter-content">
     <template v-if="groupedArticles.length > 0">
-      <div v-for="articles of groupedArticles" :key="articles.year" class="mb-6">
+      <div v-for="(articles, index) in groupedArticles" :key="index" class="mb-6">
         <h2 class="text-3xl font-bold mb-4">{{ articles.year }}</h2>
         <div v-for="link in articles.article" :key="link._path" class="mb-4 text-gray-500">
           <div class="hover:text-black dark:hover:!text-white w-max cursor-pointer hover:translate-y-[-2px]"
