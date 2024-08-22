@@ -4,8 +4,10 @@ import { computed } from 'vue';
 
 
 const { data: images } = await useFetch('/api/image')
+console.log(images, 'images');
 
 const routeIdParam = computed(() => {
+  if (!images.value || !Array.isArray(images.value)) return []
   const list = images.value!.map((item: string) => {
     return {
       total: item,
