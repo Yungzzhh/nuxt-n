@@ -1,8 +1,14 @@
 ---
 title: 'Begal App'
-description: 'meta desc if about page' 
+description: 'A project about meal planning' 
 time: '2023-10-01'
+tag: '#Flutter'
 --- 
+
+## 项目背景
+
+每天都带饭，做个菜谱用于记录和提醒
+
 ## 前端
 
 **Flutter** 和 **Figma**
@@ -191,7 +197,7 @@ USING (bucket_id = 'dishes');
 
 ## 批量导入面板
 
-### 交互设计
+## 交互设计
 
 - 输入框 - 生成菜品 - 菜品CRUD
 - AI模型选择 - AI prompt
@@ -200,7 +206,7 @@ USING (bucket_id = 'dishes');
 - 上传loading 上传成功、上传失败提示
 -
 
-### 接入AI
+## 接入AI
 
 - 配置环境
 **.env** 中配置好**OPENAI_API_KEY**

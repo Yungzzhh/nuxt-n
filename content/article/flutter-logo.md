@@ -2,6 +2,7 @@
 title: 'Flutter Logo'
 description: 'How to set a logo'
 time: '2024-08-13'
+tag: '#Flutter'
 ---
  
 可以使用 flutter_launcher_icons 插件来简化这个过程：

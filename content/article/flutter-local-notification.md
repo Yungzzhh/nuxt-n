@@ -2,6 +2,7 @@
 title: 'Flutter local notification'
 description: '在app中实现定时推送' 
 time: '2024-08-20'
+tag: '#Flutter'
 ---
 
 ## 前置工作
