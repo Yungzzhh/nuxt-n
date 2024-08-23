@@ -5,10 +5,10 @@ export default defineEventHandler((event) => {
   try {
     const config = useRuntimeConfig()
     const baseUrl = config.public.baseUrl
+
+
     const rootDir = process.cwd()
     const tempDir = path.join(rootDir, 'public', 'temp')
-    console.log('Attempting to read from:', tempDir);
-
 
     const files = fs.readdirSync(tempDir)
     console.log('Files found:', files);
