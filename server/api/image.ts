@@ -6,9 +6,13 @@ export default defineEventHandler((event) => {
     const config = useRuntimeConfig()
     const baseUrl = config.public.baseUrl
 
-
+    let tempDir = ''
     const rootDir = process.cwd()
-    const tempDir = path.join(rootDir, 'blog', 'public', 'temp'); // 注意服务器上的配置文件路径
+    if (process.env.NODE_ENV === 'development') {
+      tempDir = path.join(rootDir, 'public', 'temp'); // 注意服务器上的配置文件路径
+    } else {
+      tempDir = path.join(rootDir, 'blog', 'public', 'temp'); // 注意服务器上的配置文件路径
+    }
 
     const files = fs.readdirSync(tempDir)
     console.log('Files found:', files);
