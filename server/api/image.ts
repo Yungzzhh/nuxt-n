@@ -8,7 +8,7 @@ export default defineEventHandler((event) => {
 
 
     const rootDir = process.cwd()
-    const tempDir = path.join(rootDir, 'blog', 'public', 'temp')
+    const tempDir = path.join(rootDir, 'public', 'temp')
 
     const files = fs.readdirSync(tempDir)
     console.log('Files found:', files);
