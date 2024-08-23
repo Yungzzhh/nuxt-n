@@ -6,7 +6,7 @@ export default defineEventHandler((event) => {
     console.log(process.cwd());
     const config: any = useRuntimeConfig()
 
-    const tempDir = path.join(config.public.tempDir, 'public', 'temp')
+    const tempDir = path.join(config.public.tempDir, 'temp')
     console.log(tempDir, 'tempDir');
 
     const files = fs.readdirSync(tempDir)
