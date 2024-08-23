@@ -3,7 +3,7 @@
     <NuxtLink to="/experiment/transiton">BACK</NuxtLink>
   </div>
   <div class="card large">
-    <img :src="`/temp/${route.params.id}.jpg`" width="600" height="400"
+    <NuxtImg :src="`/temp/${route.params.id}`" width="600" height="400"
       :style="{ viewTransitionName: `card-image-${route.params.id}` }" />
   </div>
 </template>

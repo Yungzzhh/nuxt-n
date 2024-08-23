@@ -3,37 +3,27 @@ import path from 'path'
 
 export default defineEventHandler((event) => {
   try {
-    console.log(process.cwd());
-    // const config: any = useRuntimeConfig()
-
-    // const tempDir = path.join(config.public.tempDir, 'temp')
-    // console.log(tempDir, 'tempDir');
-
-    // const files = fs.readdirSync(tempDir)
-    // console.log(files, 'files');
-
-    // const images = files.filter(file => {
-    //   const ext = path.extname(file).toLowerCase()
-    //   return ['.jpg', '.jpeg', '.png', '.gif'].includes(ext)
-    // })
-    // return images
+    const config = useRuntimeConfig()
+    const baseUrl = config.public.baseUrl
     const rootDir = process.cwd()
     const tempDir = path.join(rootDir, 'public', 'temp')
     console.log('Attempting to read from:', tempDir);
 
-    if (!fs.existsSync(tempDir)) {
-      console.error('Directory does not exist:', tempDir);
-      return [];
-    }
 
     const files = fs.readdirSync(tempDir)
     console.log('Files found:', files);
 
-    const images = files.filter(file => {
-      const ext = path.extname(file).toLowerCase()
-      return ['.jpg', '.jpeg', '.png', '.gif'].includes(ext)
+    const images = files.filter((file) =>
+      /\.(jpg|jpeg|png|gif|svg)$/i.test(file)
+    );
+    return images.map((image) => {
+
+      return {
+        id: image.split('.')[0],
+        image: `${baseUrl}/temp/${image}`,
+        imageName: image
+      }
     })
-    return images
   } catch (error: any) {
     console.error('Error in image API:', error);
     throw createError({

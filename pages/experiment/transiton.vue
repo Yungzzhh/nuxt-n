@@ -8,14 +8,11 @@ console.log(images, 'images');
 
 const routeIdParam = computed(() => {
   if (!images.value || !Array.isArray(images.value)) return []
-  const list = images.value!.map((item: string) => {
-    return {
-      total: item,
-      id: item.split('.')[0]
-    }
-  })
-  return list
+  return images.value
 })
+
+console.log(routeIdParam.value);
+
 const navigateToLarge = (id: string) => {
   if (document!.startViewTransition) {
     document.startViewTransition(() => {
@@ -37,24 +34,24 @@ const navigateToLarge = (id: string) => {
 
     <div v-for="i of routeIdParam" :key="i.id">
       <NuxtLink :to="`/experiment/transition/${i.id}`">
-        <NuxtImg width="600" height="400" transition duration-400 object-cover :src="`/temp/${i.total}`"
+        <NuxtImg width="600" height="400" transition duration-400 object-cover :src="`/temp/${i.imageName}`"
           :style="{ 'view-transition-name': `item-${i.id}` }" />
       </NuxtLink>
     </div>
 
   </div>
   <div class=" h-100px"></div>
-  <div class=" flex overflow-auto gap-2">
+  <!-- <div class=" flex overflow-auto gap-2">
     <div class=" w-200px h-400px object-cover flex gap-3 bg-bluegray" v-for="i of routeIdParam">
       <div class="card small" @click="() => navigateToLarge(i.id)">
-        <img :src="`/temp/${i.id}.jpg`" width="300" height="200"
-          :style="{ viewTransitionName: `card-image-${i.id}` }" />
+        <img :src="`/temp/${i.image}`" width="300" height="200"
+          :style="{ viewTransitionName: `card-image-${i.image}` }" />
         <div class="card-content transition-delay-100">
-          <h3 :style="{ viewTransitionName: `card-title-${i.id}` }">{{ i.total }}</h3>
+          <h3 :style="{ viewTransitionName: `card-title-${i.image}` }">{{ i.total }}</h3>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </template>
 
