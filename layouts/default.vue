@@ -1,6 +1,8 @@
 <template>
-  <base-nav></base-nav>
-  <NuxtPage />
+  <div class="default-layout" id="default-layout">
+    <base-nav></base-nav>
+    <NuxtPage />
+  </div>
 </template>
 
 <script lang="ts" setup>

@@ -3,15 +3,12 @@ import { useRoute } from 'nuxt/app';
 
 const route = useRoute();
 const { data: images } = await useFetch('/api/image')
-console.log(images.value, 'images');
 
 const image = images.value?.find(i => i.id === route.params.id)!
-console.log(image, 'image');
 
 const subImageList = computed(() => {
   return images.value?.filter(i => i.id !== route.params.id)
 })
-console.log(subImageList.value, 'subImageList');
 
 </script>
 

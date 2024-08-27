@@ -1,7 +1,7 @@
 <template>
   <div :class="containerClass">
-    <div v-for="(column, index) in columns" :key="index" class="column">
-      <div v-for="item in column" :key="item.id" class="item">
+    <div v-for="(column, index) in columns" :key="index" class="flex flex-col gap-4">
+      <div v-for="item in column" :key="item.id" class="w-full">
         <NuxtImg :src="item.src" :alt="item.alt" :style="{ height: item.height + 'px' }" @click="handleClick" />
       </div>
     </div>
@@ -68,9 +68,6 @@ const handleClick = (e) => {
   gap: 1rem;
 }
 
-.item {
-  width: 100%;
-}
 
 img {
   width: 100%;

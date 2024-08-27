@@ -41,17 +41,17 @@ const navigateToLarge = (id: string) => {
 
   </div>
   <div class=" h-100px"></div>
-  <!-- <div class=" flex overflow-auto gap-2">
-    <div class=" w-200px h-400px object-cover flex gap-3 bg-bluegray" v-for="i of routeIdParam">
+  <div class=" flex overflow-auto gap-2">
+    <div class=" w-200px h-400 object-cover flex gap-3 overflow-x-auto" v-for="i of routeIdParam">
       <div class="card small" @click="() => navigateToLarge(i.id)">
-        <img :src="`/temp/${i.image}`" width="300" height="200"
-          :style="{ viewTransitionName: `card-image-${i.image}` }" />
-        <div class="card-content transition-delay-100">
-          <h3 :style="{ viewTransitionName: `card-title-${i.image}` }">{{ i.total }}</h3>
-        </div>
+        <img :src="`/temp/${i.imageName}`" width="300" height="400"
+          :style="{ viewTransitionName: `card-image-${i.id}` }" />
+        <!-- <div class="card-content transition-delay-100">
+          <h3 :style="{ viewTransitionName: `card-title-${i.id}` }">{{ i.id }}</h3>
+        </div> -->
       </div>
     </div>
-  </div> -->
+  </div>
 
 </template>
 

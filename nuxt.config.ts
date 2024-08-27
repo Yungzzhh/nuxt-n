@@ -61,6 +61,7 @@ export default defineNuxtConfig({
     '~/assets/css/main.css',
     '~/assets/css/transition.css',
     '~/assets/css/prose.css',
+    'animate.css'
   ],
   build: {
     transpile: ['medium-zoom']
