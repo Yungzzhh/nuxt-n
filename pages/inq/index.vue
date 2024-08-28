@@ -150,6 +150,7 @@ function closeModal() {
     ease: 'power2.inOut',
     onComplete: () => {
       isModalOpen.value = false
+      window.history.pushState({}, '', '/inq')
       selectedCardIndex.value = null
       enableScroll()
     }
