@@ -88,7 +88,7 @@ export default defineNuxtConfig({
     'animate.css'
   ],
   build: {
-    transpile: ['medium-zoom']
+    transpile: ['medium-zoom', '@giscus/vue']
   },
   ui: {
   },

@@ -24,14 +24,19 @@
         </div>
 
       </ContentDoc>
+      <ClientOnly>
+        <Giscus repo="Yungzzhh/nuxt-n" repoId="R_kgDOMay9Dw" category="General" categoryId="DIC_kwDOMay9D84CiBwf"
+          mapping="pathname" inputPosition="top" theme="light" lang="zh-CN" />
+      </ClientOnly>
     </main>
   </div>
 </template>
 
 <script setup>
 import FancyHeader from '~/components/content/FancyHeader.vue';
+import { defineAsyncComponent } from 'vue'
 
-
+const Giscus = defineAsyncComponent(() => import('@giscus/vue'))
 const components = {
   'fancy-header': FancyHeader
 }
