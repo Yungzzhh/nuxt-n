@@ -1,6 +1,7 @@
 <template>
-  <div class=" pt-24 slide-enter-content ">
-    <div class="text-3xl font-bold mb-4">Michael Yung</div>
+  <div class=" pt-18 slide-enter-content ">
+    <div class="mb-4">Welcome to my blog, try `Command + K` to search.</div>
+    <div class="mb-2 text-2xl font-bold mb-4">About me</div>
     <div class="text-[#555555]">
       <div class=" mb-2">A frontend developer</div>
       <div class=" mb-2">Expanding knowledge of AI, Apps, Backends, O&M, and more.</div>

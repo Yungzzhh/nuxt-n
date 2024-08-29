@@ -56,6 +56,30 @@ export default defineNuxtConfig({
     icons: true,
   },
   content: {
+    experimental: {
+      search: {
+        indexed: true,
+        options: {
+          fields: [
+            "title",
+            "content",
+          ],
+          storeFields: [
+            "title",
+            "content",
+          ],
+          searchOptions: {
+            prefix: true,
+            fuzzy: 0.2,
+            boost: {
+              title: 4,
+              content: 2,
+              titles: 1,
+            },
+          },
+        },
+      },
+    },
   },
   css: [
     '~/assets/css/main.css',
