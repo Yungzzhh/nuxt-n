@@ -5,7 +5,7 @@
     <div class="text-[#555555]">
       <div class=" mb-2">A frontend developer</div>
       <div class=" mb-2">Expanding knowledge of AI, Apps, Backends, O&M, and more.</div>
-      <div class=" mb-2">Techs: Vue, Nuxt, Tailwind, GSAP, Three.js, and more.</div>
+      <div class=" mb-2">Techs: Next, Nuxt, Tailwind, GSAP, Three.js, and more.</div>
       <div class=" mb-2">U can find some <span class="link">
           <NuxtLink to="/article">notes</NuxtLink>
         </span> & <span class="link">

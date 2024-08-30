@@ -9,7 +9,16 @@
         </div>
       </div>
     </div>
-
+    <div>
+      <TrickReverseCard>
+        <template #front>
+          <h2>Front Content</h2>
+        </template>
+        <template #back>
+          <h2>Back Content</h2>
+        </template>
+      </TrickReverseCard>
+    </div>
   </NuxtLayout>
 </template>
 
