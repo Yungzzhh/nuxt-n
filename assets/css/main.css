@@ -5,6 +5,7 @@ html {
 
 :root {
   --black: #050505;
+  /* --black: #23272F; */
   --white: #fff;
   --background: var(--white);
   --foreground: var(--black);

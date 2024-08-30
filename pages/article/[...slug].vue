@@ -26,7 +26,7 @@
       </ContentDoc>
       <ClientOnly>
         <Giscus repo="Yungzzhh/nuxt-n" repoId="R_kgDOMay9Dw" category="General" categoryId="DIC_kwDOMay9D84CiBwf"
-          mapping="pathname" inputPosition="top" theme="light" lang="zh-CN" />
+          mapping="pathname" inputPosition="top" :theme="isDark ? 'dark' : 'light'" lang="zh-CN" />
       </ClientOnly>
     </main>
   </div>
@@ -35,6 +35,9 @@
 <script setup>
 import FancyHeader from '~/components/content/FancyHeader.vue';
 import { defineAsyncComponent } from 'vue'
+
+
+const { toggleTheme, isDark } = useToggleTheme();
 
 const Giscus = defineAsyncComponent(() => import('@giscus/vue'))
 const components = {
