@@ -7,7 +7,8 @@ tag: '#Nextjs'
 
 ## 国际化方案
 
-采用 **next-international** 进行国际化
+采用 **[next-international](https://next-international.vercel.app/){target="_blank"}** 进行国际化
+
 为了持久化，将选中的语言放在了 **cookie** 中
 
 - 目录结构

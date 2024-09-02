@@ -15,14 +15,12 @@
         </article>
 
         <div class="prose">
-          <ContentRenderer :value="doc" :components="components">
-
+          <ContentRendererMarkdown :value="doc" :components="components">
             <template #empty>
               <p>No content found.</p>
             </template>
-          </ContentRenderer>
+          </ContentRendererMarkdown>
         </div>
-
       </ContentDoc>
       <ClientOnly>
         <Giscus repo="Yungzzhh/nuxt-n" repoId="R_kgDOMay9Dw" category="General" categoryId="DIC_kwDOMay9D84CiBwf"
@@ -32,21 +30,23 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import FancyHeader from '~/components/content/FancyHeader.vue';
+import CodeTab from '~/components/content/CodeTab.vue';
 import { defineAsyncComponent } from 'vue'
 
-
-const { toggleTheme, isDark } = useToggleTheme();
+const { isDark } = useToggleTheme();
 
 const Giscus = defineAsyncComponent(() => import('@giscus/vue'))
+
 const components = {
-  'fancy-header': FancyHeader
+  'fancy-header': FancyHeader,
+  'code-tab': CodeTab,
 }
-const route = useRoute()
-const res = await useAsyncData(`content-${route.path}`, () =>
-  queryContent(route.path).findOne()
-)
+// const route = useRoute()
+// const res = await useAsyncData(`content-${route.path}`, () =>
+//   queryContent(route.path).findOne()
+// )
 // const catalogList = res.data.value.body.children.filter((item) => item.tag === 'h2');
 
 // console.log(catalogList);
