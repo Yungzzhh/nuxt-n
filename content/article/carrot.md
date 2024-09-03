@@ -10,7 +10,7 @@ tag: '#Algorithm'
 
 ## 数组和链表的区别
 
-```markdown
+```md
 内存分配:
 数组: 连续的内存空间，一次性分配。
 链表: 非连续的内存空间，可以动态分配。
@@ -40,27 +40,7 @@ tag: '#Algorithm'
 如果需要频繁的插入和删除操作，尤其是在数据的开头或中间，链表可能更有优势。
 ```
 
-排序算法
-
-  冒泡排序 (Bubble Sort)
-
-  选择排序 (Selection Sort)
-
-  插入排序 (Insertion Sort)
-
-  归并排序 (Merge Sort)
-
-  快速排序 (Quick Sort)
-
-  堆排序 (Heap Sort)
-
-  计数排序 (Counting Sort)
-
-  桶排序 (Bucket Sort)
-
-  基数排序 (Radix Sort)
-
-  希尔排序 (Shell Sort)
+## 排序算法 
  
 ::code-tab{:tabs='["Bubble", "Selection", "Insertion", "Merge", "Quick", "Heap", "Counting", "Bucket", "Radix", "Shell"]'}
 

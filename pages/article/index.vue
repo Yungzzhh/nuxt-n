@@ -1,22 +1,22 @@
 <template>
   <div class="pt-8 slide-enter-content">
     <template v-if="groupedArticles.length > 0">
-      <div class="flex gap-10 w-max ">
-        <div v-for="tag in tagList" :key="tag" class="mb-4 link"
+      <div class="flex gap-4 md:gap-10 w-full flex-wrap ">
+        <div v-for="tag in tagList" :key="tag" class="mb-2 md:mb-4 link"
           :class="{ 'text-blue-500': activeTag === tag, '.dark:text-blue-300': activeTag === tag }"
           @click="activeTag = tag === ALL ? ALL : tag">
           {{ tag }}
         </div>
       </div>
       <div v-for="(articles, index) in groupedArticles" :key="index" class="mb-6">
-        <h2 class="text-3xl font-bold mb-4">{{ articles.year }}</h2>
+        <h2 class="text-xl md:text-3xl font-bold mb-4">{{ articles.year }}</h2>
         <div v-for="link in articles.article" :key="link._path" class="mb-4 text-gray-500">
           <div class="hover:text-black dark:hover:!text-white w-max cursor-pointer hover:translate-y-[-2px]"
             @click.stop="navigateTo(`${link._path}`)">
-            <span class="text-2xl font-bold mr-2">
+            <span class="text-xl md:text-2xl font-bold mr-2">
               {{ link.title || link._file }}
             </span>
-            <span class="text-sm">{{ link.time }}</span>
+            <span class="text-sm">{{ filterTime(link.time) }}</span>
           </div>
         </div>
       </div>
@@ -58,6 +58,10 @@
 
 //   await refreshNuxtData('articles')
 // }) 
+const filterTime = (time: string) => {
+  return time.split('-').slice(1, 3).join('-')
+}
+
 const { data: articles } = await useAsyncData('articles', () => queryContent('article').only(["time", "title", "tag", "_path", "_file"]).sort({
   time: -1
 }).find())

@@ -9,7 +9,7 @@
               fill="none" />
           </svg>
         </div>
-        <div class="flex flex-row items-center gap-4">
+        <div class="flex flex-row items-center gap-2 md:gap-4">
           <div v-for="link of linkList" :key="link.title">
             <NuxtLink
               class="flex items-end font-bold opacity-60  hover:opacity-100 cursor-pointer hover:translate-y-[-2px]"

@@ -1,6 +1,6 @@
 <template>
-  <div class=" pt-18 slide-enter-content ">
-    <div class="mb-4">Welcome to my blog, try `Command + K` to search.</div>
+  <div class=" pt-16 slide-enter-content ">
+    <div class="hidden md:block mb-4">Welcome to my blog, try `Command + K` to search.</div>
     <div class="mb-2 text-2xl font-bold mb-4">About me</div>
     <div class="text-[#555555]">
       <div class=" mb-2">A frontend developer</div>
