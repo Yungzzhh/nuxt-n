@@ -2,7 +2,7 @@
 title: 'Nextjs 使用 Prisma 连接 Postgresql'
 description: '初步学习Nextjs' 
 time: '2024-09-03'
-tag: '#Backend'
+tag: '#Backend,#Nextjs'
 --- 
  
 
