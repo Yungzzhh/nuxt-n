@@ -3,6 +3,9 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+  devServer: {
+    port: 8000
+  },
   experimental: {
     viewTransition: true
   },
@@ -65,7 +68,7 @@ export default defineNuxtConfig({
         // Theme used if `html.sepia`
         sepia: 'monokai'
       },
-      langs: ['ts', 'js', 'css', 'html', 'vue', 'json', 'tsx']
+      langs: ['ts', 'js', 'css', 'html', 'vue', 'json', 'tsx', 'sql', 'swift', 'bash', 'markdown', 'dart', 'yaml']
     },
     experimental: {
       search: {

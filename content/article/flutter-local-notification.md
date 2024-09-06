@@ -7,7 +7,8 @@ tag: '#Flutter'
 
 ## 前置工作
 
-```pubspec.yaml
+pubspec
+```yaml
 dependencies:
   shared_preferences: ^2.3.2
   flutter_local_notifications: ^17.2.2

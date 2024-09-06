@@ -125,15 +125,13 @@ function openModal(id: any) {
   // 使用 nextTick 确保 DOM 更新后再执行动画
   nextTick(() => {
     gsap.to('.modal', {
-      top: '50%',
-      left: '50%',
-      xPercent: -50,
-      yPercent: -50,
+      top: '5%',
+      left: '10%',
       width: '80vw',
       height: '80vh',
       maxHeight: `${window.innerHeight * 0.8}px`,
-      duration: 0.5,
-      ease: 'power2.inOut'
+      duration: 0.3,
+      ease: 'none'
     })
   })
 }
