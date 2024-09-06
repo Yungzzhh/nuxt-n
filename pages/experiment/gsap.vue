@@ -2,6 +2,7 @@
   <div>
     <div class=" m-10 w-10 h-10 bg-red-500" id="box" @click="handleClick"></div>
 
+
     <Teleport to="body">
       <div v-if="isOpen" class="absolute top-0 left-0 w-screen h-screen bg-[rgba(0,0,0,0.5)]" @click.stop="handleClose">
         <div class="w-10 h-10 bg-red-500" id="box2" :style="modelStyle"></div>
@@ -60,6 +61,5 @@ const handleClose = () => {
     }
   })
 }
-</script>
 
-<style></style>
+</script>

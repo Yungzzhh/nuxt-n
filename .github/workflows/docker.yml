@@ -1,0 +1,50 @@
+name: Build and Deploy Docker Image
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image
+        run: |
+          docker build -t michael/blog:${{ github.sha }} .
+          docker save michael/blog:${{ github.sha }} > image.tar
+
+      - name: Copy Docker image to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          source: "image.tar"
+          target: "/home/michael/docker-deploy"
+
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /home/michael/docker-deploy
+            docker load < image.tar
+            docker stop michael-blog || true
+            docker rm michael-blog || true
+            docker run -d --name michael-blog -p 3000:3000 -e PORT=3000 michael/blog:${{ github.sha }}
+            rm image.tar
+            if ! dpkg -s fontconfig >/dev/null 2>&1; then
+              sudo apt-get update
+              sudo apt-get install -y fontconfig
+            fi

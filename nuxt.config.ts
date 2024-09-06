@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true
   },
+  plugins: ['~/plugins/prisma.ts'],
   modules: [
     '@unocss/nuxt',
     '@pinia/nuxt',

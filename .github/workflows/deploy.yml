@@ -1,9 +1,9 @@
 name: Deploy Nuxt 3 Application
 
 on:
-  push:
-    branches:
-      - main # 或你希望触发部署的分支
+  # push:
+  #   branches:
+  #     - main # 或你希望触发部署的分支
   workflow_dispatch:
 
 jobs:

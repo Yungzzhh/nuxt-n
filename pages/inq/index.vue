@@ -16,6 +16,17 @@
     </template>
   </ClientOnly>
 
+  <div class="wrapper fancy">
+    <div class="textCube">
+      <div class="face front">
+        <h1>CREATIVE CODING</h1>
+      </div>
+      <div class="face side">
+        <h1>CREATIVE CODING</h1>
+      </div>
+    </div>
+  </div>
+
   <Teleport to="body">
     <div v-if="isModalOpen" class="modal-overlay" @click="closeModal">
       <div class="modal flex bg-white overflow-hidden" :style="modalStyle" @click.stop>
