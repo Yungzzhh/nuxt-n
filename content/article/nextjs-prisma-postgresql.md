@@ -158,3 +158,19 @@ services:
 docker-compose up -d
 ```
  -->
+
+
+### 检查容器内部是否能正常连接postgresql
+
+获取容器的id
+```bash
+docker ps 
+```
+
+进入容器
+```bash 
+docker exec -it 99efb0e87c25 sh
+ping [ip]
+```
+
+

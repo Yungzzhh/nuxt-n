@@ -9,7 +9,6 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true
   },
-  plugins: ['~/plugins/prisma.ts'],
   modules: [
     '@unocss/nuxt',
     '@pinia/nuxt',
@@ -19,6 +18,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     "@nuxt/ui",
     "nuxt-monaco-editor",
+  ],
+  plugins: [
+    // '~/plugins/message.ts'
   ],
   runtimeConfig: {
     public: {

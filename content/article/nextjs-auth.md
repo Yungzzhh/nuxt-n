@@ -9,6 +9,43 @@ tag: '#Nextjs'
 
 ### 概念
 
+```markdown 
+
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Nuxt App
+    participant Auth Module
+    participant API Server
+
+    User->>Browser: 访问应用
+    Browser->>Nuxt App: 请求页面
+    Nuxt App->>Auth Module: 检查认证状态
+    Auth Module->>Browser: 返回未认证状态
+    Browser->>User: 显示登录页面
+    
+    User->>Browser: 输入凭证
+    Browser->>Nuxt App: 提交登录请求
+    Nuxt App->>Auth Module: 调用登录方法
+    Auth Module->>API Server: 发送认证请求
+    API Server->>Auth Module: 返回认证令牌
+    Auth Module->>Browser: 存储令牌(Cookie/LocalStorage)
+    Auth Module->>Nuxt App: 更新认证状态
+    Nuxt App->>Browser: 重定向到受保护页面
+    Browser->>User: 显示受保护内容
+
+    Note over User,API Server: 后续请求
+    Browser->>Nuxt App: 请求受保护资源
+    Nuxt App->>Auth Module: 检查认证状态
+    Auth Module->>API Server: 发送带令牌的请求
+    API Server->>Auth Module: 返回受保护数据
+    Auth Module->>Nuxt App: 提供数据
+    Nuxt App->>Browser: 渲染受保护内容
+    Browser->>User: 显示受保护内容
+
+    
+```
+
 ```markdown
 Next-Auth 使用 JWT（JSON Web Token）来管理会话。当用户登录成功后，服务器会生成一个包含用户信息的 JWT，并将其存储在 cookie 中发送给客户端。客户端在后续的请求中会自动将这个 cookie 发送回服务器，服务器通过验证 JWT 的有效性来确定用户的登录状态。
 

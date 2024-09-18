@@ -17,6 +17,7 @@ const routes = [
   { path: "/experiment/radialBg", name: "radial-background" },
   { path: "/experiment/transiton", name: "transiton" },
   { path: "/inq", name: "小红书" },
+  { path: "/experiment/color-palette", name: "color-palette" },
 ];
 </script>
 <style scoped></style>
