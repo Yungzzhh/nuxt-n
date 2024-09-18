@@ -69,7 +69,7 @@ WORKDIR /app
 
 # 从构建阶段复制必要文件
 COPY --from=build /app/.output /app/.output
-COPY --from=build /app/.env /app/.env
+# COPY --from=build /app/.env /app/.env
 COPY --from=build /app/package.json /app/package.json
 COPY --from=build /app/pnpm-lock.yaml /app/pnpm-lock.yaml
 

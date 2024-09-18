@@ -2,7 +2,7 @@
   <div class="tabs">
     <ul class="tab-list">
       <li v-for="(tab, index) in tabs" :key="index" :class="{ active: activeTab === index }"
-        @click="setActiveTab(index)">
+        :style="{ color: activeTab === index ? '#000' : '#ccc' }" @click="setActiveTab(index)">
         {{ tab.title }}
       </li>
     </ul>
