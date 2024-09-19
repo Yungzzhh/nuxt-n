@@ -5,7 +5,6 @@ export default defineEventHandler((event) => {
   try {
     const config = useRuntimeConfig()
     const baseUrl = config.public.baseUrl
-
     let tempDir = ''
     const rootDir = process.cwd()
     if (process.env.NODE_ENV === 'development') {

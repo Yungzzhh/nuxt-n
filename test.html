@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three.js Human Light Effect</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #lightControls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="lightControls">
+    <label>Light X: <input type="range" id="lightX" min="-10" max="10" value="0" step="0.1"></label><br>
+    <label>Light Y: <input type="range" id="lightY" min="0" max="10" value="5" step="0.1"></label><br>
+    <label>Light Z: <input type="range" id="lightZ" min="-10" max="10" value="0" step="0.1"></label>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    let scene, camera, renderer, human, light;
+
+    function init() {
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Create a simple human shape (a cylinder for body and a sphere for head)
+      const bodyGeometry = new THREE.CylinderGeometry(0.5, 0.5, 2, 32);
+      const headGeometry = new THREE.SphereGeometry(0.4, 32, 32);
+      const material = new THREE.MeshPhongMaterial({ color: 0xffaa00 });
+
+      const body = new THREE.Mesh(bodyGeometry, material);
+      const head = new THREE.Mesh(headGeometry, material);
+      head.position.y = 1.4;
+
+      human = new THREE.Group();
+      human.add(body);
+      human.add(head);
+      scene.add(human);
+
+      // Add light
+      light = new THREE.PointLight(0xffffff, 1, 100);
+      light.position.set(0, 5, 0);
+      scene.add(light);
+
+      // Add ambient light
+      const ambientLight = new THREE.AmbientLight(0x404040);
+      scene.add(ambientLight);
+
+      camera.position.z = 5;
+
+      // Add event listeners for light controls
+      document.getElementById('lightX').addEventListener('input', updateLight);
+      document.getElementById('lightY').addEventListener('input', updateLight);
+      document.getElementById('lightZ').addEventListener('input', updateLight);
+    }
+
+    function updateLight() {
+      const x = parseFloat(document.getElementById('lightX').value);
+      const y = parseFloat(document.getElementById('lightY').value);
+      const z = parseFloat(document.getElementById('lightZ').value);
+      light.position.set(x, y, z);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+
+    init();
+    animate();
+
+    // Handle window resize
+    window.addEventListener('resize', function () {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+
+</html>

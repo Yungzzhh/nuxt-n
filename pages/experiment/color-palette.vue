@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import Notification from '~/components/Notification';
+import Notification from '~/components/Notification/NotificationCreation';
 
 // 多巴胺配色
 let dopamineColors = [

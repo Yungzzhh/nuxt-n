@@ -12,11 +12,9 @@
 const routes = [
   { path: "/experiment/modal-transition", name: "modal-transition" },
   { path: "/experiment/waterfall", name: "waterfall" },
-  { path: "/experiment/tabswitch", name: "tabswitch" },
-  { path: "/experiment/explore", name: "router-intercept" },
   { path: "/experiment/radialBg", name: "radial-background" },
   { path: "/experiment/transiton", name: "transiton" },
-  { path: "/inq", name: "小红书" },
+  { path: "/experiment/redbook", name: "小红书" },
   { path: "/experiment/color-palette", name: "color-palette" },
 ];
 </script>

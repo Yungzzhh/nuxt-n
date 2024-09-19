@@ -5,7 +5,7 @@
         <div v-for="(item, i) in column" :key="item.id" class="w-full">
           <div class="cursor-pointer rounded-2xl transition-all duration-300 ease p-2 shadow-2xl "
             :id="`card-${item.id}`" @click="openModal(item.id)">
-            <NuxtImg :src="`/temp/${item.content}`" />
+            <NuxtImg :src="`/temp/${item.id}.jpg`" />
             {{ item.title }}
           </div>
         </div>
@@ -19,7 +19,7 @@
     <div v-if="isModalOpen" class="modal-overlay" @click="closeModal">
       <div class="modal flex bg-white overflow-hidden" :style="modalStyle" @click.stop>
         <div class="w-2/3">
-          <NuxtImg :src="`/temp/${selectedCard.content}`" class="w-full h-full object-cover" />
+          <NuxtImg :src="`/temp/${selectedCard.id}.jpg`" class="w-full h-full object-cover" />
         </div>
         <div class="w-1/3  p-2">
           {{ selectedCard.title }}
@@ -45,6 +45,7 @@ const getColumnCount = () => {
     window.innerWidth < 768 ? 3 :
       window.innerWidth < 1024 ? 4 : 5;
 };
+
 const distributeItems = () => {
   const columnCount = getColumnCount();
 
@@ -57,31 +58,20 @@ const distributeItems = () => {
 
     columns.value[shortestColumn].push(item);
   });
+  console.log(columns.value);
 
 };
 watch(() => cards.value, distributeItems);
 
-onMounted(() => {
-  distributeItems();
-  if (isClient) {
-    window.addEventListener('resize', distributeItems);
-  }
-});
-
 const fetchImage = async () => {
-  const { data, status } = await useFetch('/api/image')
-  if (status.value === 'success') {
-    console.log(data.value)
-    if (data.value) {
-      cards.value = data.value!.map((item) => ({
-        id: item.id,
-        title: item.imageName,
-        content: item.imageName,
-        height: 400
-      }))
-    }
-  }
+  cards.value = Array.from({ length: 7 }, (_, index) => ({
+    id: index + 1,
+    title: `Title ${index + 1}`,
+    content: `Content ${index + 1}`,
+    height: 400
+  }));
 }
+
 fetchImage()
 // 保存原始的 body overflow 样式
 let originalBodyOverflow: any;
@@ -118,7 +108,7 @@ function openModal(id: any) {
   }
 
   isModalOpen.value = true
-  window.history.pushState({}, '', `/inq/${id}`)
+  window.history.pushState({}, '', `/experiment/redbook/${id}`)
   disableScroll()
 
   // 使用 nextTick 确保 DOM 更新后再执行动画
@@ -147,13 +137,19 @@ function closeModal() {
     ease: 'power2.inOut',
     onComplete: () => {
       isModalOpen.value = false
-      window.history.pushState({}, '', '/inq')
+      window.history.pushState({}, '', '/experiment/redbook')
       selectedCardIndex.value = null
       enableScroll()
     }
   })
 }
 
+onMounted(() => {
+  distributeItems();
+  if (isClient) {
+    window.addEventListener('resize', distributeItems);
+  }
+});
 
 // 确保在组件卸载时恢复滚动
 onUnmounted(() => {
