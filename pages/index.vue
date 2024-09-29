@@ -19,6 +19,13 @@
         </NuxtLink>
       </div>
       <div class="mt-4">Or mail me at michaelyung0123@gmail.com </div>
+      <svg width="600" height="600" xmlns="www.w3.org">
+        <polygon>
+          <animate attributeType="XML" attributeName="points" dur="2s" fill="freeze"
+            values="20,20 50,50 10,30; 30,50 80,90 50,10" />
+          <animate attributeType="XML" attributeName="fill" dur="2s" fill="freeze" values="red;green" />
+        </polygon>
+      </svg>
     </div>
   </div>
 </template>
